@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/core.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/events.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/css.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/coordinates.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/drag.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/dragsort.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../source/org/tool-man/cookies.js"></script>
+
+    <script language="JavaScript" type="text/javascript"><!--
+    var dragsort = ToolMan.dragsort()
+    var junkdrawer = ToolMan.junkdrawer()
+
+    window.onload = function() {
+        junkdrawer.restoreListOrder("numeric")
+
+        dragsort.makeListSortable(document.getElementById("numeric"),
+                verticalOnly, saveOrder)
+
+        var orderValues = ToolMan.junkdrawer().serializeList(document.getElementById("numeric"))
+        document.getElementById("ids").value = orderValues
+    }
+
+    function verticalOnly(item) {
+        item.toolManDragGroup.verticalOnly()
+    }
+//
+//    function speak(id, what) {
+//        var element = document.getElementById(id);
+//        element.innerHTML = 'Clicked ' + what;
+//    }
+
+    function saveOrder(item) {
+        var group = item.toolManDragGroup
+        var list = group.element.parentNode
+        var id = list.getAttribute("id")
+        if (id == null) return
+        group.register('dragend', function() {
+            ToolMan.cookies().set("list-" + id,
+                    junkdrawer.serializeList(list), 365)
+        })
+    }
+
+    function saveMyOrder(){
+        var orderValues = ToolMan.junkdrawer().serializeList(document.getElementById("numeric"))
+        document.getElementById("ids").value = orderValues
+    }
+
+    //-->
+    </script>
+</head>
+<body>
+
+<ul id="numeric">
+    <li itemID="1">one</li>
+    <li itemID="2">two</li>
+    <li itemID="3">three</li>
+</ul>
+
+<br/>
+<input class="inspector" type="button" value="Inspect" onclick="junkdrawer.inspectListOrder('numeric')"/>
+<input type="button" name="saveOrder" value="保存排序" onclick="saveMyOrder()">
+<input type="text" id="ids" name="ids" value="">
+
+</body>
+</html>

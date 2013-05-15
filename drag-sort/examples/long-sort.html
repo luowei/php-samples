@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<!-- Copyright (c) 2005 Tim Taylor Consulting (see LICENSE.txt) -->
+<html>
+<head>
+<title>Long List Sort</title>
+<link rel="stylesheet" type="text/css" href="common/common.css"/>
+<link rel="stylesheet" type="text/css" href="common/lists.css"/>
+<style type="text/css">
+	ul.boxy li {
+		margin: 0px;
+		margin-bottom: 4px;
+		opacity: 1.0;
+	}
+	.sidebar {
+		position: relative;
+		z-index: 2;
+	}
+</style>
+
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/events.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/css.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/coordinates.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/drag.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/dragsort.js"></script>
+<script language="JavaScript" type="text/javascript" src="../source/org/tool-man/cookies.js"></script>
+
+<script language="JavaScript" type="text/javascript"><!--
+	var dragsort = ToolMan.dragsort()
+	window.onload = function() {
+		ToolMan.dragsort().makeListSortable(document.getElementById('long'), verticalOnly)
+	}
+
+	function verticalOnly(item) {
+		item.toolManDragGroup.verticalOnly()
+	}
+	//-->
+</script>
+</head>
+<body>
+
+<h1>Long List Sort</h1>
+<ul class="breadcrumb">
+	<li class="first"><a href="http://tool-man.org/">Home</a></li>
+	<li><a href="./index.html">Other Examples</a></li>
+</ul>
+<br class="clear"/>
+
+<div id="ToolManLogOutput"></div>
+
+<input class="inspector" type="button" value="Inspect" onclick="ToolMan.log().adhoc(ToolMan.json().serializeList('long'))" style="margin: 0px; padding: 0px; font-size: 11px;"/>
+<ul id="long" class="boxy">
+<script language="javascript">
+	var html = ''
+	for (var i = 0; i < 500; i++) {
+		document.write('<li itemID="' + i + '" style="opacity: 1.0; z-index: 1; position: relative;">' + i + '</li>')
+	}
+	//$('long').innerHTML = html
+</script>
+</ul>
+
+
+<ul class="breadcrumb">
+	<li class="first"><a href="http://tool-man.org/">Home</a></li>
+	<li><a href="./index.html">Other Examples</a></li>
+</ul>
+
+<div id="copyright">Copyright &copy; 2005 Tim Taylor Consulting
+(<a href="LICENSE.txt">license</a>)</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-5938291-1");
+	pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+</html>
